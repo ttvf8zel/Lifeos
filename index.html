@@ -263,7 +263,7 @@ async function getQuote(ticker) {
     const fh = await fetchFinnhub(ticker);
     if (fh) return fh;
   }
-  return await fetchYahoo(ticker);
+ return await fetch(`/.netlify/functions/quote?ticker=${encodeURIComponent(ticker)}`).then(r=>r.json()).catch(()=>null);
 }
 
 async function fetchAllQuotes() {
